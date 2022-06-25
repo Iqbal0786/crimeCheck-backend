@@ -4,7 +4,7 @@ const NoticeBoard= require("../models/noticeBoard.model")
 
 router.get("",async(req,res)=>{
      try {
-         const notices= await  NoticeBoard.find().lean().exec();
+         const notices= await  NoticeBoard.find().populate({path:"user_id", select:["username"]}).lean().exec();
          return res.status(200).send(notices)
         
      } catch (error) {
